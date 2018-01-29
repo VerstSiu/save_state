@@ -5,7 +5,7 @@ Restore and save instance state helper for `Activity` and `Fragment`. Use `kotin
 
 Only support for `Bundle` related `put` and `set` methods at `API 15`.
 
-`Serialize` is not supported as default. Change your entity class to implementation of `Parcelable` if your need.
+`Serializable` is not supported as default. Change your entity class to implementation of `Parcelable` if your need.
 
 ## Usage
 
