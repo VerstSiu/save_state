@@ -38,12 +38,12 @@ Only support for `Bundle` related `put` and `set` methods at `API 15`.
       /**
        * Username.
        */
-      var username by bindStringField("user_name")
+      val username by bindStringField("user_name")
 
       /**
        * Age.
        */
-      var age by bindIntField("age", 11)
+      val age by bindIntField("age", 11)
 
       fun testField() {
         // Just use it like a simple field
