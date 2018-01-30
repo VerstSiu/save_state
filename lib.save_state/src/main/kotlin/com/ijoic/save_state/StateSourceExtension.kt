@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.util.SparseArray
 import kotlin.properties.ReadOnlyProperty
+import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 /**
@@ -40,7 +41,7 @@ import kotlin.reflect.KProperty
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindBooleanField(bindKey: String, defaultValue: Boolean = false) = injectField<Boolean>(
+fun StateSource.bindStateBoolean(bindKey: String, defaultValue: Boolean = false) = injectField<Boolean>(
     bindKey,
     defaultValue,
     { it, value -> it.putBoolean(bindKey, value) },
@@ -53,7 +54,7 @@ fun StateSource.bindBooleanField(bindKey: String, defaultValue: Boolean = false)
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindBooleanArrayField(bindKey: String, defaultValue: BooleanArray? = null) = injectField<BooleanArray?>(
+fun StateSource.bindStateBooleanArray(bindKey: String, defaultValue: BooleanArray? = null) = injectField<BooleanArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putBooleanArray(bindKey, value) },
@@ -68,7 +69,7 @@ fun StateSource.bindBooleanArrayField(bindKey: String, defaultValue: BooleanArra
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindDoubleField(bindKey: String, defaultValue: Double = 0.0) = injectField<Double>(
+fun StateSource.bindStateDouble(bindKey: String, defaultValue: Double = 0.0) = injectField<Double>(
     bindKey,
     defaultValue,
     { it, value -> it.putDouble(bindKey, value) },
@@ -81,7 +82,7 @@ fun StateSource.bindDoubleField(bindKey: String, defaultValue: Double = 0.0) = i
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindDoubleArrayField(bindKey: String, defaultValue: DoubleArray? = null) = injectField<DoubleArray?>(
+fun StateSource.bindStateDoubleArray(bindKey: String, defaultValue: DoubleArray? = null) = injectField<DoubleArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putDoubleArray(bindKey, value) },
@@ -96,7 +97,7 @@ fun StateSource.bindDoubleArrayField(bindKey: String, defaultValue: DoubleArray?
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindIntField(bindKey: String, defaultValue: Int = 0) = injectField<Int>(
+fun StateSource.bindStateInt(bindKey: String, defaultValue: Int = 0) = injectField<Int>(
     bindKey,
     defaultValue,
     { it, value -> it.putInt(bindKey, value) },
@@ -109,7 +110,7 @@ fun StateSource.bindIntField(bindKey: String, defaultValue: Int = 0) = injectFie
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindIntArrayField(bindKey: String, defaultValue: IntArray? = null) = injectField<IntArray?>(
+fun StateSource.bindStateIntArray(bindKey: String, defaultValue: IntArray? = null) = injectField<IntArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putIntArray(bindKey, value) },
@@ -124,7 +125,7 @@ fun StateSource.bindIntArrayField(bindKey: String, defaultValue: IntArray? = nul
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindLongField(bindKey: String, defaultValue: Long = 0) = injectField<Long>(
+fun StateSource.bindStateLong(bindKey: String, defaultValue: Long = 0) = injectField<Long>(
     bindKey,
     defaultValue,
     { it, value -> it.putLong(bindKey, value) },
@@ -137,7 +138,7 @@ fun StateSource.bindLongField(bindKey: String, defaultValue: Long = 0) = injectF
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindLongArrayField(bindKey: String, defaultValue: LongArray? = null) = injectField<LongArray?>(
+fun StateSource.bindStateLongArray(bindKey: String, defaultValue: LongArray? = null) = injectField<LongArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putLongArray(bindKey, value) },
@@ -152,7 +153,7 @@ fun StateSource.bindLongArrayField(bindKey: String, defaultValue: LongArray? = n
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStringField(bindKey: String, defaultValue: String? = null) = injectField<String?>(
+fun StateSource.bindStateString(bindKey: String, defaultValue: String? = null) = injectField<String?>(
     bindKey,
     defaultValue,
     { it, value -> it.putString(bindKey, value) },
@@ -165,7 +166,7 @@ fun StateSource.bindStringField(bindKey: String, defaultValue: String? = null) =
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStringArrayField(bindKey: String, defaultValue: Array<String>? = null) = injectField<Array<String>?>(
+fun StateSource.bindStateStringArray(bindKey: String, defaultValue: Array<String>? = null) = injectField<Array<String>?>(
     bindKey,
     defaultValue,
     { it, value -> it.putStringArray(bindKey, value) },
@@ -182,7 +183,7 @@ fun StateSource.bindStringArrayField(bindKey: String, defaultValue: Array<String
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindBundleField(bindKey: String, defaultValue: Bundle? = null) = injectField<Bundle?>(
+fun StateSource.bindStateBundle(bindKey: String, defaultValue: Bundle? = null) = injectField<Bundle?>(
     bindKey,
     defaultValue,
     { it, value -> it.putBundle(bindKey, value) },
@@ -197,7 +198,7 @@ fun StateSource.bindBundleField(bindKey: String, defaultValue: Bundle? = null) =
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindByteField(bindKey: String, defaultValue: Byte = 0) = injectField<Byte>(
+fun StateSource.bindStateByte(bindKey: String, defaultValue: Byte = 0) = injectField<Byte>(
     bindKey,
     defaultValue,
     { it, value -> it.putByte(bindKey, value) },
@@ -210,7 +211,7 @@ fun StateSource.bindByteField(bindKey: String, defaultValue: Byte = 0) = injectF
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindByteArrayField(bindKey: String, defaultValue: ByteArray? = null) = injectField<ByteArray?>(
+fun StateSource.bindStateByteArray(bindKey: String, defaultValue: ByteArray? = null) = injectField<ByteArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putByteArray(bindKey, value) },
@@ -225,7 +226,7 @@ fun StateSource.bindByteArrayField(bindKey: String, defaultValue: ByteArray? = n
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindCharField(bindKey: String, defaultValue: Char = 0.toChar()) = injectField<Char>(
+fun StateSource.bindStateChar(bindKey: String, defaultValue: Char = 0.toChar()) = injectField<Char>(
     bindKey,
     defaultValue,
     { it, value -> it.putChar(bindKey, value) },
@@ -238,7 +239,7 @@ fun StateSource.bindCharField(bindKey: String, defaultValue: Char = 0.toChar()) 
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindCharArrayField(bindKey: String, defaultValue: CharArray? = null) = injectField<CharArray?>(
+fun StateSource.bindStateCharArray(bindKey: String, defaultValue: CharArray? = null) = injectField<CharArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putCharArray(bindKey, value) },
@@ -253,7 +254,7 @@ fun StateSource.bindCharArrayField(bindKey: String, defaultValue: CharArray? = n
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindCharSequenceField(bindKey: String, defaultValue: CharSequence? = null) = injectField<CharSequence?>(
+fun StateSource.bindStateCharSequence(bindKey: String, defaultValue: CharSequence? = null) = injectField<CharSequence?>(
     bindKey,
     defaultValue,
     { it, value -> it.putCharSequence(bindKey, value) },
@@ -266,7 +267,7 @@ fun StateSource.bindCharSequenceField(bindKey: String, defaultValue: CharSequenc
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindCharSequenceArrayField(bindKey: String, defaultValue: Array<CharSequence>? = null) = injectField<Array<CharSequence>?>(
+fun StateSource.bindStateCharSequenceArray(bindKey: String, defaultValue: Array<CharSequence>? = null) = injectField<Array<CharSequence>?>(
     bindKey,
     defaultValue,
     { it, value -> it.putCharSequenceArray(bindKey, value) },
@@ -279,7 +280,7 @@ fun StateSource.bindCharSequenceArrayField(bindKey: String, defaultValue: Array<
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindCharSequenceArrayListField(bindKey: String, defaultValue: ArrayList<CharSequence>? = null) = injectField(
+fun StateSource.bindStateCharSequenceArrayList(bindKey: String, defaultValue: ArrayList<CharSequence>? = null) = injectField(
     bindKey,
     defaultValue,
     { it, value -> it.putCharSequenceArrayList(bindKey, value) },
@@ -294,7 +295,7 @@ fun StateSource.bindCharSequenceArrayListField(bindKey: String, defaultValue: Ar
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindFloatField(bindKey: String, defaultValue: Float = 0F) = injectField<Float>(
+fun StateSource.bindStateFloat(bindKey: String, defaultValue: Float = 0F) = injectField<Float>(
     bindKey,
     defaultValue,
     { it, value -> it.putFloat(bindKey, value) },
@@ -307,7 +308,7 @@ fun StateSource.bindFloatField(bindKey: String, defaultValue: Float = 0F) = inje
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindFloatArrayField(bindKey: String, defaultValue: FloatArray? = null) = injectField<FloatArray?>(
+fun StateSource.bindStateFloatArray(bindKey: String, defaultValue: FloatArray? = null) = injectField<FloatArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putFloatArray(bindKey, value) },
@@ -322,7 +323,7 @@ fun StateSource.bindFloatArrayField(bindKey: String, defaultValue: FloatArray? =
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindIntegerArrayListField(bindKey: String, defaultValue: ArrayList<Int>? = null) = injectField(
+fun StateSource.bindStateIntegerArrayList(bindKey: String, defaultValue: ArrayList<Int>? = null) = injectField(
     bindKey,
     defaultValue,
     { it, value -> it.putIntegerArrayList(bindKey, value) },
@@ -337,7 +338,7 @@ fun StateSource.bindIntegerArrayListField(bindKey: String, defaultValue: ArrayLi
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun<T: Parcelable> StateSource.bindParcelableField(bindKey: String, defaultValue: T? = null) = injectField<T?>(
+fun<T: Parcelable> StateSource.bindStateParcelable(bindKey: String, defaultValue: T? = null) = injectField<T?>(
     bindKey,
     defaultValue,
     { it, value -> it.putParcelable(bindKey, value) },
@@ -350,7 +351,7 @@ fun<T: Parcelable> StateSource.bindParcelableField(bindKey: String, defaultValue
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindParcelableArrayField(bindKey: String, defaultValue: Array<Parcelable>? = null) = injectField<Array<Parcelable>?>(
+fun StateSource.bindStateParcelableArray(bindKey: String, defaultValue: Array<Parcelable>? = null) = injectField<Array<Parcelable>?>(
     bindKey,
     defaultValue,
     { it, value -> it.putParcelableArray(bindKey, value) },
@@ -363,7 +364,7 @@ fun StateSource.bindParcelableArrayField(bindKey: String, defaultValue: Array<Pa
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun<T: Parcelable> StateSource.bindParcelableArrayListField(bindKey: String, defaultValue: ArrayList<T>? = null) = injectField<ArrayList<T>?>(
+fun<T: Parcelable> StateSource.bindStateParcelableArrayList(bindKey: String, defaultValue: ArrayList<T>? = null) = injectField<ArrayList<T>?>(
     bindKey,
     defaultValue,
     { it, value -> it.putParcelableArrayList(bindKey, value) },
@@ -378,7 +379,7 @@ fun<T: Parcelable> StateSource.bindParcelableArrayListField(bindKey: String, def
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindShortField(bindKey: String, defaultValue: Short = 0) = injectField<Short>(
+fun StateSource.bindStateShort(bindKey: String, defaultValue: Short = 0) = injectField<Short>(
     bindKey,
     defaultValue,
     { it, value -> it.putShort(bindKey, value) },
@@ -391,7 +392,7 @@ fun StateSource.bindShortField(bindKey: String, defaultValue: Short = 0) = injec
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindShortArrayField(bindKey: String, defaultValue: ShortArray? = null) = injectField<ShortArray?>(
+fun StateSource.bindStateShortArray(bindKey: String, defaultValue: ShortArray? = null) = injectField<ShortArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putShortArray(bindKey, value) },
@@ -406,7 +407,7 @@ fun StateSource.bindShortArrayField(bindKey: String, defaultValue: ShortArray? =
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun<T: Parcelable> StateSource.bindSparseParcelableArrayField(bindKey: String, defaultValue: SparseArray<T>? = null) = injectField<SparseArray<T>?>(
+fun<T: Parcelable> StateSource.bindStateSparseParcelableArray(bindKey: String, defaultValue: SparseArray<T>? = null) = injectField<SparseArray<T>?>(
     bindKey,
     defaultValue,
     { it, value -> it.putSparseParcelableArray(bindKey, value) },
@@ -421,7 +422,7 @@ fun<T: Parcelable> StateSource.bindSparseParcelableArrayField(bindKey: String, d
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStringArrayListField(bindKey: String, defaultValue: ArrayList<String>? = null) = injectField<ArrayList<String>?>(
+fun StateSource.bindStateStringArrayList(bindKey: String, defaultValue: ArrayList<String>? = null) = injectField<ArrayList<String>?>(
     bindKey,
     defaultValue,
     { it, value -> it.putStringArrayList(bindKey, value) },
@@ -440,13 +441,11 @@ private fun<T> StateSource.injectField(
     bindKey: String,
     defaultValue: T,
     saveField: (Bundle, T) -> Unit,
-    restoreField: (Bundle) -> T) = object: ReadOnlyProperty<StateSource, StateField<T>> {
+    restoreField: (Bundle) -> T): ReadWriteProperty<StateSource, T> {
 
-  override fun getValue(thisRef: StateSource, property: KProperty<*>): StateField<T> {
-    val field = StateField<T>(defaultValue)
-    val item = FunFieldSaveItem<T>(field, bindKey, saveField, restoreField)
+  val field = StateField<StateSource, T>(defaultValue)
+  val item = FunFieldSaveItem<T>(field, bindKey, saveField, restoreField)
 
-    getSaveState().addSaveItem(item)
-    return field
-  }
+  getSaveState().addSaveItem(item)
+  return field
 }

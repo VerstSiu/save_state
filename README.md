@@ -12,7 +12,7 @@ Only support for `Bundle` related `put` and `set` methods at `API 15`.
 1. Make your activity/fragment extends `BaseActivity`, `BaseFragment`, or write basic codes by your own:
 
     ```kotlin
-    open class BaseFragment: Fragment(), StateSource {
+    open class MyBaseFragment: Fragment(), StateSource {
 
       private val saveState = SaveState()
 
@@ -30,15 +30,15 @@ Only support for `Bundle` related `put` and `set` methods at `API 15`.
     }
     ```
 
-2. Use `bindXXField` at sub activity/fragment class:
+2. Use `bindStateXX` at sub activity/fragment class:
 
     ```kotlin
-    class MyFragment: BaseFragment() {
+    class MyFragment: MyBaseFragment() {
 
       /**
        * Username.
        */
-      val username by bindStringField("user_name")
+      val username by bindStateString("user_name")
 
       /**
        * Age.
@@ -46,15 +46,30 @@ Only support for `Bundle` related `put` and `set` methods at `API 15`.
       val age by bindIntField("age", 11)
 
       fun testField() {
-        // Just use it like a simple field
+        // Use it just like a simple field property
         // And not need to care about data state
-        val name = username.getValue()
-        username.setValue("Tony")
+        val name = username
+        username = "Tony"
 
-        val age = age.getValue()
-        age.setValue(12)
+        val age = this.age
+        this.age = 12
       }
     }
+    ```
+
+3. Get field value rules:
+
+    ```kotlin
+    val fieldSetManual: Boolean
+    val restoreContainsFieldKey: Boolean
+
+    if (fieldSetManual) {
+      return fieldValue
+    }
+    if (restoreContainsFieldKey) {
+      return restoreValue
+    }
+    return defaultValue
     ```
 
 ## Support Field Types

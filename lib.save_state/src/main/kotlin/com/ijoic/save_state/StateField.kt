@@ -17,6 +17,9 @@
  */
 package com.ijoic.save_state
 
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
+
 /**
  * Lifecycle state field.
  *
@@ -27,7 +30,7 @@ package com.ijoic.save_state
  *
  * @see SaveState
  */
-class StateField<T> internal constructor(private val defaultValue: T) {
+internal class StateField<in R, T> internal constructor(private val defaultValue: T): ReadWriteProperty<R, T> {
 
   private var filedValue: T = defaultValue
   private var savedFieldValue: T = defaultValue
@@ -35,21 +38,11 @@ class StateField<T> internal constructor(private val defaultValue: T) {
   private var fieldInit = false
   private var restoreInit = false
 
-
   /**
-   * Set field value.
+   * This method will return restore value if field value is not manual set, default value if restore
+   * value is not automatically set.
    */
-  fun setValue(value: T) {
-    fieldInit = true
-    this.filedValue = value
-  }
-
-  /**
-   * Returns field value.
-   *
-   * <p>This method will return saved field value, if field is not manual initialized.</p>
-   */
-  fun getValue(): T {
+  override fun getValue(thisRef: R, property: KProperty<*>): T {
     if (fieldInit) {
       return filedValue
     }
@@ -59,13 +52,17 @@ class StateField<T> internal constructor(private val defaultValue: T) {
     return defaultValue
   }
 
+  override fun setValue(thisRef: R, property: KProperty<*>, value: T) {
+    fieldInit = true
+    this.filedValue = value
+  }
+
   /**
    * Measure saved value.
    */
   internal fun measureSavedValue(): T {
     val value = filedValue
     savedFieldValue = value
-    fieldInit = false
     return value
   }
 
