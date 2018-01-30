@@ -59,7 +59,7 @@ Only support for `Bundle` related `put` and `set` methods at `API 15`.
     }
     ```
 
-3. Get field value rules:
+3. Get field rules:
 
     ```kotlin
     val fieldSetManual: Boolean
