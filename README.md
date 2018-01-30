@@ -45,7 +45,7 @@ Only support for `Bundle` related `put` and `set` methods at `API 15`.
       /**
        * Age.
        */
-      val age by bindIntField("age", 11)
+      val age by bindStateInt("age", 11)
 
       fun testField() {
         // Use it just like a simple field property
