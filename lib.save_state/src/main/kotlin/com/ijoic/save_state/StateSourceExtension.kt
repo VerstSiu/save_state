@@ -444,7 +444,7 @@ private fun<T> StateSource.injectField(
     restoreField: (Bundle) -> T): ReadWriteProperty<StateSource, T> {
 
   val field = StateField<StateSource, T>(defaultValue)
-  val item = FunFieldSaveItem<T>(field, bindKey, saveField, restoreField)
+  val item = FunFieldSaveItem<StateSource, T>(field, bindKey, saveField, restoreField)
 
   getSaveState().addSaveItem(item)
   return field

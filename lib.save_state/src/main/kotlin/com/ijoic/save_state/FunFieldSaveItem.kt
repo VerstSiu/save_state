@@ -25,8 +25,8 @@ import android.os.Bundle
  * @author xiao.yl on 2018/1/29.
  * @version 1.0
  */
-internal class FunFieldSaveItem<T>(
-    private val field: StateField<T>,
+internal class FunFieldSaveItem<R, T>(
+    private val field: StateField<R, T>,
     private val fieldKey: String,
     private val saveField: (Bundle, T) -> Unit,
     private val restoreField: (Bundle) -> T): SaveItem {
