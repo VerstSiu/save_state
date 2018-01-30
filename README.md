@@ -18,14 +18,16 @@ Only support for `Bundle` related `put` and `set` methods at `API 15`.
 
       override fun getSaveState() = saveState
 
+      override fun onActivityCreated(savedInstanceState: Bundle?) {
+        // Override onActivityCreated for Fragment
+        // And onRestoreInstanceState for Activity
+        super.onActivityCreated(savedInstanceState)
+        saveState.restore(savedInstanceState)
+      }
+
       override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         saveState.save(outState)
-      }
-
-      override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        saveState.restore(savedInstanceState)
       }
     }
     ```

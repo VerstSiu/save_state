@@ -34,13 +34,14 @@ open class BaseFragment : Fragment(), StateSource {
 
   override fun getSaveState() = saveState
 
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
+    saveState.restore(savedInstanceState)
+  }
+
   override fun onSaveInstanceState(outState: Bundle?) {
     super.onSaveInstanceState(outState)
     saveState.save(outState)
   }
 
-  override fun onViewStateRestored(savedInstanceState: Bundle?) {
-    super.onViewStateRestored(savedInstanceState)
-    saveState.restore(savedInstanceState)
-  }
 }
