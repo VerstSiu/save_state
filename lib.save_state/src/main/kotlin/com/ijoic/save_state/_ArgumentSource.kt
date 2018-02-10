@@ -20,20 +20,7 @@ package com.ijoic.save_state
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.SparseArray
-import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
-
-/**
- * State source extension.
- *
- * @author xiao.yl on 2018/1/29.
- * @version 1.0
- */
-
-/* BaseBundle(min as API 15) */
-
-/* Boolean */
 
 /**
  * Bind boolean field.
@@ -41,7 +28,7 @@ import kotlin.reflect.KProperty
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateBoolean(bindKey: String, defaultValue: Boolean = false) = injectField<Boolean>(
+fun ArgumentSource.bindArgsBoolean(bindKey: String, defaultValue: Boolean = false) = injectField<Boolean>(
     bindKey,
     defaultValue,
     { it, value -> it.putBoolean(bindKey, value) },
@@ -54,14 +41,12 @@ fun StateSource.bindStateBoolean(bindKey: String, defaultValue: Boolean = false)
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateBooleanArray(bindKey: String, defaultValue: BooleanArray? = null) = injectField<BooleanArray?>(
+fun ArgumentSource.bindArgsBooleanArray(bindKey: String, defaultValue: BooleanArray? = null) = injectField<BooleanArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putBooleanArray(bindKey, value) },
     { it.getBooleanArray(bindKey) ?: defaultValue }
 )
-
-/* Double */
 
 /**
  * Bind double field.
@@ -69,7 +54,7 @@ fun StateSource.bindStateBooleanArray(bindKey: String, defaultValue: BooleanArra
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateDouble(bindKey: String, defaultValue: Double = 0.0) = injectField<Double>(
+fun ArgumentSource.bindArgsDouble(bindKey: String, defaultValue: Double = 0.0) = injectField<Double>(
     bindKey,
     defaultValue,
     { it, value -> it.putDouble(bindKey, value) },
@@ -82,14 +67,12 @@ fun StateSource.bindStateDouble(bindKey: String, defaultValue: Double = 0.0) = i
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateDoubleArray(bindKey: String, defaultValue: DoubleArray? = null) = injectField<DoubleArray?>(
+fun ArgumentSource.bindArgsDoubleArray(bindKey: String, defaultValue: DoubleArray? = null) = injectField<DoubleArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putDoubleArray(bindKey, value) },
     { it.getDoubleArray(bindKey) ?: defaultValue }
 )
-
-/* Int */
 
 /**
  * Bind int field.
@@ -97,7 +80,7 @@ fun StateSource.bindStateDoubleArray(bindKey: String, defaultValue: DoubleArray?
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateInt(bindKey: String, defaultValue: Int = 0) = injectField<Int>(
+fun ArgumentSource.bindArgsInt(bindKey: String, defaultValue: Int = 0) = injectField<Int>(
     bindKey,
     defaultValue,
     { it, value -> it.putInt(bindKey, value) },
@@ -110,14 +93,12 @@ fun StateSource.bindStateInt(bindKey: String, defaultValue: Int = 0) = injectFie
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateIntArray(bindKey: String, defaultValue: IntArray? = null) = injectField<IntArray?>(
+fun ArgumentSource.bindArgsIntArray(bindKey: String, defaultValue: IntArray? = null) = injectField<IntArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putIntArray(bindKey, value) },
     { it.getIntArray(bindKey) ?: defaultValue }
 )
-
-/* Long */
 
 /**
  * Bind long field.
@@ -125,7 +106,7 @@ fun StateSource.bindStateIntArray(bindKey: String, defaultValue: IntArray? = nul
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateLong(bindKey: String, defaultValue: Long = 0) = injectField<Long>(
+fun ArgumentSource.bindArgsLong(bindKey: String, defaultValue: Long = 0) = injectField<Long>(
     bindKey,
     defaultValue,
     { it, value -> it.putLong(bindKey, value) },
@@ -138,14 +119,12 @@ fun StateSource.bindStateLong(bindKey: String, defaultValue: Long = 0) = injectF
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateLongArray(bindKey: String, defaultValue: LongArray? = null) = injectField<LongArray?>(
+fun ArgumentSource.bindArgsLongArray(bindKey: String, defaultValue: LongArray? = null) = injectField<LongArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putLongArray(bindKey, value) },
     { it.getLongArray(bindKey) ?: defaultValue }
 )
-
-/* String */
 
 /**
  * Bind string field.
@@ -153,7 +132,7 @@ fun StateSource.bindStateLongArray(bindKey: String, defaultValue: LongArray? = n
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateString(bindKey: String, defaultValue: String? = null) = injectField<String?>(
+fun ArgumentSource.bindArgsString(bindKey: String, defaultValue: String? = null) = injectField<String?>(
     bindKey,
     defaultValue,
     { it, value -> it.putString(bindKey, value) },
@@ -166,16 +145,12 @@ fun StateSource.bindStateString(bindKey: String, defaultValue: String? = null) =
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateStringArray(bindKey: String, defaultValue: Array<String>? = null) = injectField<Array<String>?>(
+fun ArgumentSource.bindArgsStringArray(bindKey: String, defaultValue: Array<String>? = null) = injectField<Array<String>?>(
     bindKey,
     defaultValue,
     { it, value -> it.putStringArray(bindKey, value) },
     { it.getStringArray(bindKey) ?: defaultValue }
 )
-
-/* Bundle(min as API 15) */
-
-/* Bundle */
 
 /**
  * Bind bundle field.
@@ -183,14 +158,12 @@ fun StateSource.bindStateStringArray(bindKey: String, defaultValue: Array<String
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateBundle(bindKey: String, defaultValue: Bundle? = null) = injectField<Bundle?>(
+fun ArgumentSource.bindArgsBundle(bindKey: String, defaultValue: Bundle? = null) = injectField<Bundle?>(
     bindKey,
     defaultValue,
     { it, value -> it.putBundle(bindKey, value) },
     { it.getBundle(bindKey) ?: defaultValue }
 )
-
-/* Byte */
 
 /**
  * Bind byte field.
@@ -198,7 +171,7 @@ fun StateSource.bindStateBundle(bindKey: String, defaultValue: Bundle? = null) =
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateByte(bindKey: String, defaultValue: Byte = 0) = injectField<Byte>(
+fun ArgumentSource.bindArgsByte(bindKey: String, defaultValue: Byte = 0) = injectField<Byte>(
     bindKey,
     defaultValue,
     { it, value -> it.putByte(bindKey, value) },
@@ -211,14 +184,12 @@ fun StateSource.bindStateByte(bindKey: String, defaultValue: Byte = 0) = injectF
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateByteArray(bindKey: String, defaultValue: ByteArray? = null) = injectField<ByteArray?>(
+fun ArgumentSource.bindArgsByteArray(bindKey: String, defaultValue: ByteArray? = null) = injectField<ByteArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putByteArray(bindKey, value) },
     { it.getByteArray(bindKey) ?: defaultValue }
 )
-
-/* Char */
 
 /**
  * Bind char field.
@@ -226,7 +197,7 @@ fun StateSource.bindStateByteArray(bindKey: String, defaultValue: ByteArray? = n
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateChar(bindKey: String, defaultValue: Char = 0.toChar()) = injectField<Char>(
+fun ArgumentSource.bindArgsChar(bindKey: String, defaultValue: Char = 0.toChar()) = injectField<Char>(
     bindKey,
     defaultValue,
     { it, value -> it.putChar(bindKey, value) },
@@ -239,14 +210,12 @@ fun StateSource.bindStateChar(bindKey: String, defaultValue: Char = 0.toChar()) 
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateCharArray(bindKey: String, defaultValue: CharArray? = null) = injectField<CharArray?>(
+fun ArgumentSource.bindArgsCharArray(bindKey: String, defaultValue: CharArray? = null) = injectField<CharArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putCharArray(bindKey, value) },
     { it.getCharArray(bindKey) ?: defaultValue }
 )
-
-/* Char Sequence */
 
 /**
  * Bind char sequence field.
@@ -254,7 +223,7 @@ fun StateSource.bindStateCharArray(bindKey: String, defaultValue: CharArray? = n
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateCharSequence(bindKey: String, defaultValue: CharSequence? = null) = injectField<CharSequence?>(
+fun ArgumentSource.bindArgsCharSequence(bindKey: String, defaultValue: CharSequence? = null) = injectField<CharSequence?>(
     bindKey,
     defaultValue,
     { it, value -> it.putCharSequence(bindKey, value) },
@@ -267,7 +236,7 @@ fun StateSource.bindStateCharSequence(bindKey: String, defaultValue: CharSequenc
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateCharSequenceArray(bindKey: String, defaultValue: Array<CharSequence>? = null) = injectField<Array<CharSequence>?>(
+fun ArgumentSource.bindArgsCharSequenceArray(bindKey: String, defaultValue: Array<CharSequence>? = null) = injectField<Array<CharSequence>?>(
     bindKey,
     defaultValue,
     { it, value -> it.putCharSequenceArray(bindKey, value) },
@@ -280,14 +249,12 @@ fun StateSource.bindStateCharSequenceArray(bindKey: String, defaultValue: Array<
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateCharSequenceArrayList(bindKey: String, defaultValue: ArrayList<CharSequence>? = null) = injectField(
+fun ArgumentSource.bindArgsCharSequenceArrayList(bindKey: String, defaultValue: ArrayList<CharSequence>? = null) = injectField(
     bindKey,
     defaultValue,
     { it, value -> it.putCharSequenceArrayList(bindKey, value) },
     { it.getCharSequenceArrayList(bindKey) ?: defaultValue }
 )
-
-/* Float */
 
 /**
  * Bind float field.
@@ -295,7 +262,7 @@ fun StateSource.bindStateCharSequenceArrayList(bindKey: String, defaultValue: Ar
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateFloat(bindKey: String, defaultValue: Float = 0F) = injectField<Float>(
+fun ArgumentSource.bindArgsFloat(bindKey: String, defaultValue: Float = 0F) = injectField<Float>(
     bindKey,
     defaultValue,
     { it, value -> it.putFloat(bindKey, value) },
@@ -308,14 +275,12 @@ fun StateSource.bindStateFloat(bindKey: String, defaultValue: Float = 0F) = inje
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateFloatArray(bindKey: String, defaultValue: FloatArray? = null) = injectField<FloatArray?>(
+fun ArgumentSource.bindArgsFloatArray(bindKey: String, defaultValue: FloatArray? = null) = injectField<FloatArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putFloatArray(bindKey, value) },
     { it.getFloatArray(bindKey) ?: defaultValue }
 )
-
-/* Int */
 
 /**
  * Bind integer array list field.
@@ -323,14 +288,12 @@ fun StateSource.bindStateFloatArray(bindKey: String, defaultValue: FloatArray? =
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateIntegerArrayList(bindKey: String, defaultValue: ArrayList<Int>? = null) = injectField(
+fun ArgumentSource.bindArgsIntegerArrayList(bindKey: String, defaultValue: ArrayList<Int>? = null) = injectField(
     bindKey,
     defaultValue,
     { it, value -> it.putIntegerArrayList(bindKey, value) },
     { it.getIntegerArrayList(bindKey) ?: defaultValue }
 )
-
-/* Parcelable */
 
 /**
  * Bind parcelable field.
@@ -338,7 +301,7 @@ fun StateSource.bindStateIntegerArrayList(bindKey: String, defaultValue: ArrayLi
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun<T: Parcelable> StateSource.bindStateParcelable(bindKey: String, defaultValue: T? = null) = injectField<T?>(
+fun<T: Parcelable> ArgumentSource.bindArgsParcelable(bindKey: String, defaultValue: T? = null) = injectField<T?>(
     bindKey,
     defaultValue,
     { it, value -> it.putParcelable(bindKey, value) },
@@ -351,7 +314,7 @@ fun<T: Parcelable> StateSource.bindStateParcelable(bindKey: String, defaultValue
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateParcelableArray(bindKey: String, defaultValue: Array<Parcelable>? = null) = injectField<Array<Parcelable>?>(
+fun ArgumentSource.bindArgsParcelableArray(bindKey: String, defaultValue: Array<Parcelable>? = null) = injectField<Array<Parcelable>?>(
     bindKey,
     defaultValue,
     { it, value -> it.putParcelableArray(bindKey, value) },
@@ -364,14 +327,12 @@ fun StateSource.bindStateParcelableArray(bindKey: String, defaultValue: Array<Pa
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun<T: Parcelable> StateSource.bindStateParcelableArrayList(bindKey: String, defaultValue: ArrayList<T>? = null) = injectField<ArrayList<T>?>(
+fun<T: Parcelable> ArgumentSource.bindArgsParcelableArrayList(bindKey: String, defaultValue: ArrayList<T>? = null) = injectField(
     bindKey,
     defaultValue,
     { it, value -> it.putParcelableArrayList(bindKey, value) },
     { it.getParcelableArrayList(bindKey) ?: defaultValue }
 )
-
-/* Short */
 
 /**
  * Bind short field.
@@ -379,7 +340,7 @@ fun<T: Parcelable> StateSource.bindStateParcelableArrayList(bindKey: String, def
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateShort(bindKey: String, defaultValue: Short = 0) = injectField<Short>(
+fun ArgumentSource.bindArgsShort(bindKey: String, defaultValue: Short = 0) = injectField<Short>(
     bindKey,
     defaultValue,
     { it, value -> it.putShort(bindKey, value) },
@@ -392,37 +353,33 @@ fun StateSource.bindStateShort(bindKey: String, defaultValue: Short = 0) = injec
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateShortArray(bindKey: String, defaultValue: ShortArray? = null) = injectField<ShortArray?>(
+fun ArgumentSource.bindArgsShortArray(bindKey: String, defaultValue: ShortArray? = null) = injectField<ShortArray?>(
     bindKey,
     defaultValue,
     { it, value -> it.putShortArray(bindKey, value) },
     { it.getShortArray(bindKey) ?: defaultValue }
 )
 
-/* SparseParcelableArray */
-
 /**
  * Bind string array list field.
  *
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun<T: Parcelable> StateSource.bindStateSparseParcelableArray(bindKey: String, defaultValue: SparseArray<T>? = null) = injectField<SparseArray<T>?>(
+fun<T: Parcelable> ArgumentSource.bindArgsSparseParcelableArray(bindKey: String, defaultValue: SparseArray<T>? = null) = injectField<SparseArray<T>?>(
     bindKey,
     defaultValue,
     { it, value -> it.putSparseParcelableArray(bindKey, value) },
     { it.getSparseParcelableArray(bindKey) ?: defaultValue }
 )
 
-/* String */
-
 /**
  * Bind string array list field.
  *
  * @param bindKey bind key.
  * @param defaultValue default value.
  */
-fun StateSource.bindStateStringArrayList(bindKey: String, defaultValue: ArrayList<String>? = null) = injectField<ArrayList<String>?>(
+fun ArgumentSource.bindArgsStringArrayList(bindKey: String, defaultValue: ArrayList<String>? = null) = injectField(
     bindKey,
     defaultValue,
     { it, value -> it.putStringArrayList(bindKey, value) },
@@ -437,15 +394,8 @@ fun StateSource.bindStateStringArrayList(bindKey: String, defaultValue: ArrayLis
  * @param saveField saved field: fun(outState: Bundle, value: T).
  * @param restoreField restore field: fun(outState: Bundle): T.
  */
-private fun<T> StateSource.injectField(
+private fun<T> ArgumentSource.injectField(
     bindKey: String,
     defaultValue: T,
     saveField: (Bundle, T) -> Unit,
-    restoreField: (Bundle) -> T): ReadWriteProperty<StateSource, T> {
-
-  val field = StateField<StateSource, T>(defaultValue)
-  val item = FunFieldSaveItem<StateSource, T>(field, bindKey, saveField, restoreField)
-
-  getSaveState().addSaveItem(item)
-  return field
-}
+    restoreField: (Bundle) -> T): ReadWriteProperty<ArgumentSource, T> = ArgumentField<T>(bindKey, defaultValue, saveField, restoreField)

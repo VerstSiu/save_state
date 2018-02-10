@@ -19,6 +19,7 @@ package com.ijoic.save_state.content.v4
 
 import android.app.Fragment
 import android.os.Bundle
+import com.ijoic.save_state.ArgumentSource
 import com.ijoic.save_state.SaveState
 import com.ijoic.save_state.StateSource
 
@@ -28,7 +29,7 @@ import com.ijoic.save_state.StateSource
  * @author xiao.yl on 2018/1/30.
  * @version 1.0
  */
-open class BaseFragment : Fragment(), StateSource {
+open class BaseFragment : Fragment(), StateSource, ArgumentSource {
 
   private val saveState = SaveState()
 
